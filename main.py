@@ -9,7 +9,6 @@ livro = claLivrosBD.LivrosBD('LivrosBD.db3')
 opcao = 0
 
 
-
 def tela_inicial():
     print('=========================================================================================================')
     print('==================================== Cadastro de Livros =================================================')
@@ -45,6 +44,7 @@ def tela_cadastro():
     print('')
     data_compra = input('Digite a data de compra: ')
     livro.inserir(titulo, autor, editora, edicao, ano_publ, local, data_compra)
+
 
 while opcao != 6:
     opcao = tela_inicial()
