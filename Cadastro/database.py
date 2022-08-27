@@ -54,13 +54,13 @@ class LivrosBD:
         for linha in self.cursor.fetchall():
             print(linha)
 
-    def fechar(self):
+    def fechar_bd(self):
         self.cursor.close()
         self.conn.close()
 
 
 if __name__ == '__main__':
-    livro = LivrosBD('LivrosBD.db3')
+    livro = LivrosBD('/LivrosBD.db3')
 
     # livro.inserir('Programação em Python 3', 'Mark Summerfield', 'Alta Books', 'primeira', '2013', 'Casa', '')
     livro.listar()

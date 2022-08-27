@@ -2,8 +2,9 @@
 main
 """
 import os
+#from CadastroclaLivrosBD import LivrosBD
 
-import claLivrosBD
+from claLivrosBD import LivrosBD
 
 livro = claLivrosBD.LivrosBD('LivrosBD.db3')
 
