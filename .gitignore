@@ -301,4 +301,7 @@ cython_debug/
 # Ignore code-workspaces
 *.code-workspace
 
+# Ignore dynaconf secret files
+.secrets.*
+
 # End of https://www.toptal.com/developers/gitignore/api/python,pycharm,visualstudiocode

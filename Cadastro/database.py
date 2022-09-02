@@ -1,66 +1,23 @@
-"""
-Classe para conexão ao banco de dados SqlLite3
-"""
+'''
+Ligação com o banco de dados
 
-import sqlite3 as lite
+'''
 
+from sqlmodel import Session, create_engine
+from sqlmodel.sql.expression import Select, SelectOfScalar
 
-class LivrosBD:
-    def __init__(self, arquivo: object) -> object:
-        self.conn = lite.connect(arquivo)
-        self.cursor = self.conn.cursor()
-
-    def inserir(
-        self,
-        titulo: object,
-        autor: object,
-        editora: object,
-        edicao: object,
-        ano: object,
-        local: object,
-        data_compra: object,
-    ) -> object:
-        consulta = 'INSERT OR IGNORE INTO livros (titulo, autor, editora, edicao, ano, local, data_compra) VALUES (?, ?, ?, ?, ?, ?, ? )'
-        self.cursor.execute(
-            consulta, (titulo, autor, editora, edicao, ano, local, data_compra)
-        )
-        self.conn.commit()
-
-    def editar(
-        self, titulo, autor, editora, edicao, ano, local, data_compra, id
-    ):
-        consulta = 'UPDATE OR IGNORE livros SET titulo=?, autor=?, editora=?, edicao=?, ano=?, local=?, data_compra=? WHERE id=?'
-        self.cursor.execute(
-            consulta,
-            (titulo, autor, editora, edicao, ano, local, data_compra, id),
-        )
-        self.conn.commit()
-
-    def excluir(self, id):
-        consulta = 'DELETE FROM livros WHERE id=?'
-        self.cursor.execute(consulta, (id,))
-        self.conn.commit()
-
-    def listar(self):
-        self.cursor.execute('SELECT * FROM livros')
-
-        for linha in self.cursor.fetchall():
-            print(linha)
-
-    def buscar(self, valor):
-        consulta = 'SELECT * FROM livros WHERE nome LIKE ?'
-        self.cursor.execute(consulta, (f'%{valor}%',))
-
-        for linha in self.cursor.fetchall():
-            print(linha)
-
-    def fechar_bd(self):
-        self.cursor.close()
-        self.conn.close()
+from cadastro import models 
+from cadastro.config import settings
 
 
-if __name__ == '__main__':
-    livro = LivrosBD('/LivrosBD.db3')
+engine = create_engine(settings.database.url, echo=False)
 
-    # livro.inserir('Programação em Python 3', 'Mark Summerfield', 'Alta Books', 'primeira', '2013', 'Casa', '')
-    livro.listar()
+# Cria o banco de dados
+models.SQLModel.metadata.create_all(engine)
+
+
+def get_session():
+    return Session(engine)
+
+
+# Para crir o banco python databas.py

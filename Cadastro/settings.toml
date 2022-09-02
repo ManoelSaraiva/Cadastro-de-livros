@@ -1,0 +1,4 @@
+name = "cadastro"
+
+[database]
+url = "sqlite:///livros_bd.db3"

@@ -2,11 +2,9 @@
 main
 """
 import os
-#from CadastroclaLivrosBD import LivrosBD
+from database_livros import LivrosBD
 
-from claLivrosBD import LivrosBD
-
-livro = claLivrosBD.LivrosBD('LivrosBD.db3')
+livro = LivrosBD('.\LivrosBD.db3')
 
 opcao = 0
 
@@ -64,12 +62,12 @@ while opcao != 6:
     opcao = tela_inicial()
 
     if opcao == 1:
-        print('1-')
+        print('1')
         os.system('clear') or None
         tela_cadastro()
 
     elif opcao == 2:
-        print('2-')
+        print('2')
     elif opcao == 3:
         print('3')
     elif opcao == 4:
